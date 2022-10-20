@@ -13,7 +13,7 @@ const Home = ({ newGreeting, setNewGreeting }) => {
             Emerald DApp!
           </a>
         </h1>
-        <p>This is a DApp created by Jacob Tucker.</p>
+        <p>This is a DApp</p>
 
         <div className="flex">
           <button onClick={printHello}>Hello</button>
