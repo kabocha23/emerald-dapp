@@ -20,7 +20,9 @@ const Navbar = () => {
   return (
     <nav className="nav">
       <h1>Emerald DApp</h1>
-      <button onClick={handleAuthentication}>Log In</button>
+      <button onClick={handleAuthentication}>
+        {user.loggedIn ? user.addr : "Log In"}
+      </button>
     </nav>
   );
 };
