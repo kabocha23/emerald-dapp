@@ -1,3 +1,5 @@
+import "./Home.css";
+
 const Home = ({
   runTransaction,
   greeting,
@@ -5,10 +7,11 @@ const Home = ({
   changeSimpleTest,
   number,
   setNewNumber,
+  txStatus,
 }) => {
   return (
     <div>
-      <main className="main">
+      <div className="welcome">
         <h1 className="title">
           Welcome to my{" "}
           <a href="https://academy.ecdao.org" target="_blank">
@@ -16,9 +19,11 @@ const Home = ({
           </a>
         </h1>
         <p>Jason Kobuchi's DApp</p>
+      </div>
 
+      <main className="main">
         <div className="flex">
-          <button onClick={runTransaction}>Run Transaction</button>
+          <button onClick={runTransaction}>{txStatus}</button>
           <input
             onChange={(e) => setNewGreeting(e.target.value)}
             placeholder="Change the greeting here..."
