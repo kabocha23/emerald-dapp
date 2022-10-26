@@ -11,6 +11,7 @@ function App() {
   const [user, setUser] = useState({ loggedIn: false });
   const [number, setNumber] = useState(0);
   const [newNumber, setNewNumber] = useState(0);
+  const [txStatus, setTxStatus] = useState("Run Transaction");
 
   const runTransaction = async () => {
     const transactionId = await fcl.mutate({
@@ -31,6 +32,19 @@ function App() {
       limit: 999,
     });
     console.log("Here is the transactionId: " + transactionId);
+    fcl.tx(transactionId).subscribe((res) => {
+      console.log(res);
+      if (res.status === 0 || res.status === 1) {
+        setTxStatus("Pending...");
+      } else if (res.status === 2) {
+        setTxStatus("Finalized...");
+      } else if (res.status === 3) {
+        setTxStatus("Executed...");
+      } else if (res.status === 4) {
+        setTxStatus("Sealed!");
+        setTimeout(() => setTxStatus("Run Transaction"), 2000);
+      }
+    });
     await fcl.tx(transactionId).onceSealed();
     executeScript();
   };
@@ -104,6 +118,7 @@ function App() {
         number={number}
         setNewNumber={setNewNumber}
         changeSimpleTest={changeSimpleTest}
+        txStatus={txStatus}
       />
     </div>
   );
