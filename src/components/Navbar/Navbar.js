@@ -1,5 +1,6 @@
 import "../../flow/config.js";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import "./Navbar.css";
 
 const Navbar = ({ fcl, user, setUser }) => {
   useEffect(() => {
@@ -17,10 +18,16 @@ const Navbar = ({ fcl, user, setUser }) => {
   return (
     <nav className="nav">
       <h1>Emerald DApp</h1>
-      <p>Logged in as {user.addr}</p>
-      <button onClick={handleAuthentication}>
-        {user.loggedIn ? "Log Out" : "Log In"}
-      </button>
+      {user.loggedIn ? (
+        <React.Fragment>
+          <p>Logged in as {user.addr}</p>
+          <button onClick={handleAuthentication}>Log Out</button>
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          <button onClick={handleAuthentication}>Log In</button>
+        </React.Fragment>
+      )}
     </nav>
   );
 };
